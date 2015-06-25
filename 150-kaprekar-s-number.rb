@@ -1,28 +1,25 @@
 # this is the exercise for https://rubymonk.com/learning/books/1-ruby-primer/problems/150-kaprekar-s-number
 
 def kaprekar?(k)
-  @k = k
   square_of_k = k*k
-  array = square_of_k.to_s.split('')
-  check_if_kaprekar_number(array)
+  @digits = square_of_k.to_s.split('')
+  k == kaprekar_sum
 end
 
-def check_if_kaprekar_number(array)
-  @k == calculate_number(array)
+private
+
+def kaprekar_sum
+  calculate_left_digits + calculate_right_digits
 end
 
-def calculate_number(array)
-  calculate_left_digits(array) + calculate_right_digits(array)
+def calculate_left_digits
+  @digits[0..calculate_array_values-1].join.to_i
 end
 
-def calculate_left_digits(array)
-  array[0..calculate_array_values(array)-1].join.to_i
+def calculate_right_digits
+  @digits[calculate_array_values..-1].join.to_i
 end
 
-def calculate_right_digits(array)
-  array[calculate_array_values(array)..-1].join.to_i
-end
-
-def calculate_array_values(array)
-  (array.size / 2)
+def calculate_array_values
+  @digits.size / 2
 end
